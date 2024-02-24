@@ -8,7 +8,7 @@ const RoutePlan = () => {
             <div>
                 <h3 className='text-xl font-semibold'>Route:</h3>
                 <select className="select select-ghost w-full max-w-xs p-2 bg-gray-300">
-                    <option disabled selected>Makkah-madina-makkah</option>
+                    <option>Makkah-madina-makkah</option>
                     <option>madina-makkah</option>
                     <option>jeddah-madina</option>
                     <option>tayef-madina</option>

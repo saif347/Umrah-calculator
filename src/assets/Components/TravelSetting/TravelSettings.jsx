@@ -5,7 +5,7 @@ const TravelSettings = () => {
     return (
         <section className='border p-4 rounded-md space-y-3'>
             <h3 className='text-xl font-semibold border-b-2 border-black inline-block'>Travel settings</h3> <br />
-            <input type="checkbox" className="checkbox mr-4" />
+            <input type="checkbox" defaultChecked className="checkbox mr-4" />
             <label htmlFor="travel" className='font-semibold'>Umrah muallim (Travel assistant)</label>
             <div>
                 <h3 className='text-xl font-semibold'>Traveler quantity:</h3>
