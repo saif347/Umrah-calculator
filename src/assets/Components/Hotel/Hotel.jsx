@@ -2,8 +2,8 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 
 
-const Hotel = ({ handleNumberOfDaysMakkah, handleNumberOfDaysMadina, calculateLivingCost, numberOfStays, madinaStays, livingCost, perNightInMakkah, perNightInMadina, setPerNightInMakkah, setPerNightInMadina }) => {
-    const [showAdditionalInfo, setAdditionalInfo] = useState(false)
+const Hotel = ({ perNightInMakkah, perNightInMadina, setPerNightInMakkah, setPerNightInMadina, calculateLivingCost, submitted }) => {
+    const [showAdditionalInfo, setAdditionalInfo] = useState(true)
 
     const handleCheckBox = () => {
         setAdditionalInfo(!showAdditionalInfo)
@@ -47,10 +47,6 @@ const Hotel = ({ handleNumberOfDaysMakkah, handleNumberOfDaysMadina, calculateLi
                                 </select>
                                 <p>per night {perNightInMakkah} $</p>
                             </div>
-                            <label className="label-text mx-2 font-medium">
-                                stay:
-                                <input className="py-1 px-4 rounded-lg" type="number" value={numberOfStays} onChange={handleNumberOfDaysMakkah} />
-                            </label>
                         </div>
                         <div>
                             <h3 className='text-xl font-semibold'>select hotel in madina</h3>
@@ -63,37 +59,22 @@ const Hotel = ({ handleNumberOfDaysMakkah, handleNumberOfDaysMadina, calculateLi
                                 </select>
                                 <p>per night {perNightInMadina} $</p>
                             </div>
-                            <label className="label-text mx-2 font-medium">
-                                stay :
-                                <input className="py-1 px-4 rounded-lg" type="number" value={madinaStays} onChange={handleNumberOfDaysMadina} />
-                            </label>
                         </div>
-                        <div className="p-1 bg-white rounded w-[200px]">
-                            <div>
-                                <button className="label-text mx-2 font-medium p-1" onClick={calculateLivingCost}>Calculate Total Cost</button>
-                            </div>
-                            {livingCost > 0 && (
-                                <div>
-                                    <h3>Total Cost: ${livingCost}</h3>
-                                </div>
-                            )}
-                        </div>
+                        <button className="label-text font-medium px-3 py-1 border rounded-2xl" onClick={calculateLivingCost}>{
+                            submitted ? 'Submitted' : 'Submit'
+                        }</button>
                     </> : ''
             }
         </section>
     );
 };
 Hotel.propTypes = {
-    handleNumberOfDaysMakkah: PropTypes.func,
-    handleNumberOfDaysMadina: PropTypes.func,
     calculateLivingCost: PropTypes.func,
-    numberOfStays: PropTypes.number,
-    madinaStays: PropTypes.number,
-    livingCost: PropTypes.number,
     perNightInMakkah: PropTypes.number,
     perNightInMadina: PropTypes.number,
     setPerNightInMakkah: PropTypes.func,
-    setPerNightInMadina: PropTypes.func
+    setPerNightInMadina: PropTypes.func,
+    submitted: PropTypes.any
 }
 
 export default Hotel;

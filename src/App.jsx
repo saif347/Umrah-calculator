@@ -11,8 +11,8 @@ function App() {
   const [numberOfDays, setNumberOfDays] = useState(1); // Default to 1 day car rent
   const [transportation, setTransportation] = useState(0); //  car rent total
   // hotel
-  const [numberOfStays, setNumberOfStays] = useState(1); // Default to 1 day
-  const [madinaStays, setMadinaStays] = useState(1); // Default to 1 day
+  // const [numberOfStays, setNumberOfStays] = useState(1); // Default to 1 day
+  // const [madinaStays, setMadinaStays] = useState(1); // Default to 1 day
   const [livingCost, setLivingCost] = useState(0);
   const [perNightInMakkah, setPerNightInMakkah] = useState(50)
   const [perNightInMadina, setPerNightInMadina] = useState(30)
@@ -20,12 +20,17 @@ function App() {
   // const [hotelPerNightMadina, setHotelPerNightMadina] = useState(20)
 
   // food
-  const [packageCount, setPackageCount] = useState(1);
   const [howManyDays, setHowManyDays] = useState(1);
+  const [selectedOptions, setSelectedOptions] = useState('');
+  const [foodPrice, setFoodPrice] = useState(0);
   const [foodExpenses, setFoodExpenses] = useState(0)
 
   // total umrah cost 
   const [TotalUmrahCost, setTotalUmrahCost] = useState(0)
+
+  const [submittedLiving, setSubmittedLiving]= useState(false)
+  const [submittedFood, setSubmittedFood]= useState(false)
+  const [submittedRental, setSubmittedRental]= useState(false)
 
   // car rent
   const handleNumberOfDaysChange = (event) => {
@@ -37,38 +42,35 @@ function App() {
     const dailyRate = 10;
     const totalCost = numberOfDays * dailyRate;
     setTransportation(totalCost);
+    setSubmittedRental(!submittedRental)
   };
 
   // hotel
-  const handleNumberOfDaysMakkah = (event) => {
-    setNumberOfStays(parseInt(event.target.value));
-  };
-  const handleNumberOfDaysMadina = (event) => {
-    setMadinaStays(parseInt(event.target.value));
-  };
 
   const calculateLivingCost = () => {
-    const perNightInMakkah = 50
-    const perNightInMadina = 30;
-    const totalInMakkah = numberOfStays * perNightInMakkah;
-    const totalInMadina = madinaStays * perNightInMadina;
+    const totalInMakkah = perNightInMakkah * 2;
+    const totalInMadina = perNightInMadina * 2;
+
     const livingExpenses = totalInMakkah + totalInMadina;
     setLivingCost(livingExpenses);
+    setSubmittedLiving(!submittedLiving)
   };
+  console.log(submittedLiving)
 
   // food 
-  const handleNumOgPackage = e => {
-    setPackageCount(e.target.value)
+  const handleFoodCategory = (e) => {
+    setSelectedOptions(e.target.value);
+    if (e.target.value === "kangal voj") setFoodPrice(50)
+    else if (e.target.value === "Shahi voj") setFoodPrice(100)
   }
   const handleNumOfDays = e => {
     setHowManyDays(e.target.value)
   }
 
   const calculateFoodExpenses = () => {
-    const dailyCatering = 25
-    let totalPackage = packageCount * howManyDays;
-    let total = totalPackage * dailyCatering;
+    let total = foodPrice * howManyDays;
     setFoodExpenses(total)
+    setSubmittedFood(!submittedFood)
   }
 
   const handleTotalUmrahCost = () => {
@@ -95,46 +97,42 @@ function App() {
 
       {/* route plan */}
       <RoutePlan></RoutePlan>
-      {/* Transport */}
-      <TransPortation
-        handleNumberOfDaysChange={handleNumberOfDaysChange}
-        numberOfDays={numberOfDays}
-        totalCost={transportation}
-        calculateTotalCost={calculateTotalCost}
-      ></TransPortation>
 
       {/*hotel services  */}
       <Hotel
-        handleNumberOfDaysMakkah={handleNumberOfDaysMakkah}
-        handleNumberOfDaysMadina={handleNumberOfDaysMadina}
-        numberOfStays={numberOfStays}
-        madinaStays={madinaStays}
         perNightInMakkah={perNightInMakkah}
         perNightInMadina={perNightInMadina}
         calculateLivingCost={calculateLivingCost}
         livingCost={livingCost}
         setPerNightInMakkah={setPerNightInMakkah}
         setPerNightInMadina={setPerNightInMadina}
+        submitted={submittedLiving}
       ></Hotel>
 
+      {/* Transport */}
+      <TransPortation
+        handleNumberOfDaysChange={handleNumberOfDaysChange}
+        numberOfDays={numberOfDays}
+        totalCost={transportation}
+        calculateTotalCost={calculateTotalCost}
+        submittedRental={submittedRental}
+      ></TransPortation>
       {/*food  */}
       <FoodServices
-        handleNumOgPackage={handleNumOgPackage}
+        handleFoodCategory={handleFoodCategory}
         handleNumOfDays={handleNumOfDays}
         calculateFoodExpenses={calculateFoodExpenses}
-        packageCount={packageCount}
+        foodPrice={foodPrice}
+        selectedOptions={selectedOptions}
         howManyDays={howManyDays}
         foodExpenses={foodExpenses}
+        submittedFood={submittedFood}
       ></FoodServices>
 
       <button onClick={handleTotalUmrahCost} className="py-1 px-2 text-lg rounded-lg font-medium bg-slate-300 text-gray-600 mb-2">Calculate total cost</button>
 
       <div className='p-1 bg-white rounded w-[200px]'>
-        <p className='text-lg font-medium'>Transportation: {transportation} $ </p>
-        <p className='text-lg font-medium'>livingCost: {livingCost} $</p>
-        <p className='text-lg font-medium'>Food Expenses: {foodExpenses} $ </p>
-        <hr />
-        <p> Total Cost :{TotalUmrahCost}</p>
+        <p> Total Cost :{TotalUmrahCost}$</p>
       </div>
 
     </div >

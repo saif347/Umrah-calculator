@@ -25,29 +25,17 @@ const FlightBooking = () => {
             </div>
 
             <div>
-                <h3 className='text-xl font-semibold'>Max transit</h3>
+                <h3 className='text-xl font-semibold'>Transit</h3>
                 <div className='flex items-center gap-2'>
                     <div className="form-control">
                         <label className="label cursor-pointer">
-                            <span className="label-text mx-2 font-medium">Direct (no transit)</span>
+                            <span className="label-text mx-2 font-medium">no transit</span>
                             <input type="radio" name="transit" className="radio" />
                         </label>
                     </div>
                     <div className="form-control">
                         <label className="label cursor-pointer">
-                            <span className="label-text mx-2 font-medium">3h</span>
-                            <input type="radio" name="transit" className="radio" />
-                        </label>
-                    </div>
-                    <div className="form-control">
-                        <label className="label cursor-pointer">
-                            <span className="label-text mx-2 font-medium">6h</span>
-                            <input type="radio" name="transit" className="radio" />
-                        </label>
-                    </div>
-                    <div className="form-control">
-                        <label className="label cursor-pointer">
-                            <span className="label-text mx-2 font-medium">12+h</span>
+                            <span className="label-text mx-2 font-medium">Take Transit</span>
                             <input type="radio" name="transit" className="radio" />
                         </label>
                     </div>

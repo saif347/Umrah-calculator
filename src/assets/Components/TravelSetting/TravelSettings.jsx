@@ -29,11 +29,11 @@ const TravelSettings = () => {
                     <div className="">
                         <label className="label cursor-pointer mr-4">
                             <span className="label-text mx-2">From</span>
-                            <input type="date" name="" className="mb-2" />
+                            <input type="date" name="" className="mb-2 p-2" />
                         </label>
                         <label className="label cursor-pointer">
                             <span className="label-text mx-2">To</span>
-                            <input type="date" name="" className="p-1" />
+                            <input type="date" name="" className="p-2" />
                         </label>
                     </div>
                 </div>
